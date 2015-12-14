@@ -30,7 +30,7 @@ pip install awscli
 
 # Test local
 
-1. Add vagrant box
+## 1. Add vagrant box
 
 ```bash
 vagrant init
@@ -43,10 +43,16 @@ Change vagrant configration, ie. Vagrantfile.
 config.vm.network :forwarded_port, guest: 22, host: 2222, host_ip: "0.0.0.0", id: "ssh", auto_correct: true)
 ```
 
-2. Clone thie repository
+## 2. Clone thie repository
 
 ```bash
-git clone https://github.com/polarlights/ansible_packer_example.gi;w
+git clone https://github.com/polarlights/ansible_packer_example.git
+```
+
+## 3. Build image
+
+```bash
+packer build templates/development/base-server.json
 ```
 
 # Deploy to AWS

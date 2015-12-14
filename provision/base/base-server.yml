@@ -1,0 +1,6 @@
+---
+- name: server base configration
+  hosts: base-server
+  roles:
+    - common
+  gather_facts: true

@@ -1,0 +1,11 @@
+---
+- name: config sshd for security
+  lineinfile: dest=/etc/ssh/sshd_config
+              regexp="{{ item.regexp }}"
+              line="{{ item.line }}"
+  with_items:
+    - { regexp: '^PermitRootLogin', line: 'PermitRootLogin no' }
+    - { regexp: '^PasswordAuthentication', line: 'PasswordAuthentication no' }
+  sudo: true
+  notify: restart sshd
+  tags: sshd

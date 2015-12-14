@@ -1,0 +1,31 @@
+{
+  "variables": {
+    "ssh_host": "localhost",
+    "ssh_port": "2222",
+    "ssh_username": "vagrant",
+    "ssh_private_key_file": ""
+  },
+  "builders": [
+    {
+      "type": "vagrant",
+      "ssh_host": "{{user `ssh_host`}}",
+      "ssh_port": "{{user `ssh_port`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_private_key_file": "{{user `ssh_private_key_file`}}"
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": ["provision/scripts/apt-update.sh", "provision/scripts/install-ansible.sh"]
+    },
+    {
+      "type": "ansible-local",
+      "inventory_groups": "base-server",
+      "playbook_file": "provision/base/base-server.yml",
+      "playbook_dir": "provision/base"
+    }
+  ],
+  "post-processors": []
+}
