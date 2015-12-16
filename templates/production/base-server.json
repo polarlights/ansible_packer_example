@@ -8,7 +8,7 @@
       "type": "amazon-ebs",
       "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
-      "region": "ap-northeast-1a",
+      "region": "ap-northeast-1",
       "source_ami": "ami-936d9d93",
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
@@ -18,13 +18,13 @@
   "provisioners": [
     {
       "type": "shell",
-      "scripts": ["provision/scripts/apt-update-upgrade.sh", "provision/scripts/install-ansible.sh"]
+      "scripts": ["provision/scripts/apt-update.sh", "provision/scripts/install-ansible.sh"]
     },
     {
       "type": "ansible-local",
       "inventory_groups": "base-server",
-      "playbook_file": "provision/ansible/base/base-server.yml",
-      "playbook_dir": "provision/ansible/base"
+      "playbook_file": "provision/base/base-server.yml",
+      "playbook_dir": "provision/base"
     }
   ],
   "post-processors": []
