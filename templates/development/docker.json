@@ -3,7 +3,7 @@
     "ssh_host": "localhost",
     "ssh_port": "2222",
     "ssh_username": "vagrant",
-    "ssh_private_key_file": ""
+    "ssh_private_key_file": "/Volumes/WDC/Projects/vagrants/aws_study/.vagrant/machines/default/virtualbox/private_key"
   },
   "builders": [
     {
@@ -17,14 +17,10 @@
 
   "provisioners": [
     {
-      "type": "shell",
-      "scripts": ["provision/scripts/apt-update.sh", "provision/scripts/install-ansible.sh"]
-    },
-    {
       "type": "ansible-local",
-      "inventory_groups": "base-server",
-      "playbook_file": "provision/base/base-server.yml",
-      "playbook_dir": "provision/base"
+      "inventory_groups": "docker",
+      "playbook_file": "provision/docker/docker.yml",
+      "playbook_dir": "provision/docker"
     }
   ],
   "post-processors": []
