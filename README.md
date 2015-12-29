@@ -52,7 +52,7 @@ git clone https://github.com/polarlights/ansible_packer_example.git
 ## 3. Build image
 
 ```bash
-packer build templates/development/base-server.json
+packer build -var-file=templates/development/variables.json templates/development/mysql.json
 ```
 
 # Deploy to AWS
@@ -61,6 +61,7 @@ TBD
 
 # TODO
 
-- [ ] basic ansible scripts.
-- [ ] integrate with packer.
+- [*] basic ansible scripts.
+- [] integrate with packer.
+- [ ] add configration for nginx.
 - [ ] add configration for docker.

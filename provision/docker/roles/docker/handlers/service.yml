@@ -1,8 +1,0 @@
----
-- name: restart sshd
-  service: name=ssh state=restarted
-  sudo: true
-
-- name: restart ntp
-  service: name=ntpd state=restarted
-  sudo: true

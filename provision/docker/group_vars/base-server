@@ -1,6 +1,0 @@
----
-# This filename should as the same as the ansible configration name, ie: base-server.yml
-users:
-  - name: polarlights
-    authorized_keys:
-      - roles/common/files/authorized_keys/polarlights.pub
