@@ -1,0 +1,36 @@
+---
+- name: create user group ansible
+  group: name=ansible
+         gid=1024
+  sudo: true
+  tags: users
+
+- name: create users
+  user: name={{ item.name }}
+        shell=/bin/bash
+        groups=sudo,ansible
+        append=yes
+  with_items: users
+  sudo: true
+  tags: users
+
+- name: Deubg is
+  debug: msg="{{item.0}}"
+  with_subelements:
+    - users
+    - authorized_keys
+
+# Reference: http://docs.ansible.com/ansible/playbooks_loops.html
+- name: set up authorized_keys
+  authorized_key: user={{ item.0.name }}
+                  key="{{ lookup('file', item.1) }}"
+  with_subelements:
+    - users
+    - authorized_keys
+  sudo: true
+  tags: users
+
+- name: set nopasswd for ansible group
+  lineinfile: "dest=/etc/sudoers regexp='^%sudo' line='%sudo	ALL=(ALL)	NOPASSWD: ALL' validate='visudo -cf %s'"
+  sudo: true
+  tags: users

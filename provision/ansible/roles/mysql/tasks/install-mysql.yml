@@ -1,0 +1,9 @@
+---
+- name: Install the mysql packages
+  apt: name={{ item }}
+  with_items:
+    - mysql-server
+    - mysql-client
+    - python-mysqldb
+  sudo: true
+  tags: mysql

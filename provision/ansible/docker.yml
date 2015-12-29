@@ -1,0 +1,6 @@
+---
+- name: server docker configration
+  hosts: docker
+  roles:
+    - docker
+  gather_facts: true

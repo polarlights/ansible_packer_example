@@ -17,13 +17,9 @@
   ],
   "provisioners": [
     {
-      "type": "shell",
-      "scripts": ["provision/scripts/apt-update.sh", "provision/scripts/install-ansible.sh"]
-    },
-    {
       "type": "ansible-local",
-      "inventory_groups": "base-server",
-      "playbook_file": "provision/ansible/base-server.yml",
+      "inventory_groups": "docker",
+      "playbook_file": "provision/ansible/docker.yml",
       "playbook_dir": "provision/ansible"
     }
   ],

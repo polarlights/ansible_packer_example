@@ -1,0 +1,16 @@
+---
+
+#users
+- include: users.yml
+
+# localtime
+- include: localtime.yml
+
+# sources
+- include: sources.yml
+
+# sercurity
+- include: security.yml
+
+# basic packages
+- include: basic-packages.yml

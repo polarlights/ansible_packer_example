@@ -1,0 +1,6 @@
+---
+- name: server mysql configration
+  hosts: mysql
+  roles:
+    - mysql
+  gather_facts: true

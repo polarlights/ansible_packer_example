@@ -17,14 +17,14 @@
 
   "provisioners": [
     {
-      "type": "shell",
-      "scripts": ["provision/scripts/apt-update.sh", "provision/scripts/install-ansible.sh"]
-    },
-    {
       "type": "ansible-local",
-      "inventory_groups": "base-server",
-      "playbook_file": "provision/ansible/base-server.yml",
-      "playbook_dir": "provision/ansible"
+      "inventory_groups": "mysql",
+      "group_vars": "provision/ansible/group_vars",
+      "playbook_file": "provision/ansible/mysql.yml",
+      "playbook_dir": "provision/ansible",
+      "extra_arguments": [
+         "--sudo"
+       ]
     }
   ],
   "post-processors": []

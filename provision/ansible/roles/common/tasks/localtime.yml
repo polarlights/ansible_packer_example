@@ -1,0 +1,4 @@
+---
+- name: set up localtime to Ascia/Shanghai
+  command: sudo ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+  sudo: true
