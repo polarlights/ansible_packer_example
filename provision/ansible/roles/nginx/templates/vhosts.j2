@@ -1,0 +1,53 @@
+#jinja2: lstrip_blocks: True
+{% for vhost in nginx_vhosts %}
+  {% if vhost.upstream is defined %}
+upstream {{ vhost.upstream.name }} {
+  {% for address in vhost.upstream.addresses %}
+  server {{ address }};
+  {% endfor %}
+}
+  {% endif %}
+
+server {
+  listen {{ vhost.listen | default('80 default_server') }};
+  {% if vhost.ssl | default(false) %}
+  listen 443 ssl;
+  {% endif %}
+  server_name {{ vhost.server_name }};
+
+  {% if vhost.root is defined %}
+  root {{ vhost.root }};
+  {% endif %}
+
+  {% if vhost.index is defined %}
+  index {{ vhost.index }};
+  {% endif %}
+
+  {% if vhost.error_page is defined %}
+  error_page {{ vhost.error_page }};
+  {% endif %}
+  {% if vhost.access_log is defined %}
+  access_log {{ vhost.access_log }};
+  {% endif %}
+  {% if vhost.error_log is defined %}
+  error_log {{ vhost.error_log }} error;
+  {% endif %}
+
+  {% if vhost.return is defined %}
+  return {{ vhost.return }};
+  {% endif %}
+
+  {% if vhost.extra_parameters is defined %}
+  {{ vhost.extra_parameters }}
+  {% endif %}
+
+  {% if vhost.upstream is defined %}
+  try_files $uri, @{{ vhost.upstream.name }};
+
+  location @{{ vhost.upstream.name }} {
+     proxy_pass http://{{ vhost.upstream.name }};
+  }
+  {% endif %}
+}
+{% endfor %}
+

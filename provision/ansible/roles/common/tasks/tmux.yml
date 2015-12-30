@@ -1,0 +1,3 @@
+- name: tmux config file
+  copy: src=tmux/tmux.conf dest=/etc/tmux.conf
+  sudo: yes

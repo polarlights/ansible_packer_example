@@ -1,0 +1,5 @@
+- name: install and configure nginx
+  hosts: nginx
+  roles:
+    - nginx
+  gather_facts: true

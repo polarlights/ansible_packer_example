@@ -1,0 +1,31 @@
+{
+  "variables": {
+    "ssh_host": "localhost",
+    "ssh_port": "2222",
+    "ssh_username": "vagrant",
+    "ssh_private_key_file": ""
+  },
+  "builders": [
+    {
+      "type": "null",
+      "ssh_host": "{{user `ssh_host`}}",
+      "ssh_port": "{{user `ssh_port`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_private_key_file": "{{user `ssh_private_key_file`}}"
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "ansible-local",
+      "inventory_groups": "nginx",
+      "group_vars": "provision/ansible/group_vars",
+      "playbook_file": "provision/ansible/nginx.yml",
+      "playbook_dir": "provision/ansible",
+      "extra_arguments": [
+         "--sudo"
+       ]
+    }
+  ],
+  "post-processors": []
+}

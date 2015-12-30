@@ -1,0 +1,42 @@
+- name: ensure that GPG key for RVM is installed
+  command: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  args:
+    creates: /root/.gnupg/secring.gpg
+
+- name: ensure that RVM is installed
+  shell: curl -sSL https://get.rvm.io | bash -s stable
+  args:
+    creates: /usr/local/rvm
+
+- name: upload rvm files
+  copy: src={{ item }} dest=/usr/local/rvm/archives/
+  with_items: ruby_files
+
+- name: ensure that ruby is installed
+  command: "/usr/local/rvm/bin/rvm install {{ item }}"
+  with_items: rubies
+  args:
+    creates: "/usr/local/rvm/gems/ruby-{{ item }}"
+
+- name: set default version of ruby with rvm
+  command: "/usr/local/rvm/bin/rvm alias create default ruby-{{ default_ruby }}"
+  args:
+    creates: /usr/local/rvm/config/alias
+
+- name: config gem sources
+  copy: src=rubies/gemrc dest=/etc/gemrc
+
+- name: link gemrc configration
+  file:
+    src: /etc/gemrc
+    dest: /home/{{ item.name }}/.gemrc
+    owner: "{{ item.name }}"
+    group: "ansible"
+    state: link
+  with_items: users
+
+- name: install bundler
+  shell: " /usr/local/rvm/bin/rvm ruby-{{ item }} do gem install bundler"
+  with_items: rubies
+  args:
+    creates: "/usr/local/rvm/gems/ruby-{{ item }}/bin/bundler"
