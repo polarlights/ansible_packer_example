@@ -1,5 +1,3 @@
----
-
 #users
 - include: users.yml
 
@@ -14,3 +12,16 @@
 
 # basic packages
 - include: basic-packages.yml
+
+#copy tmux configration
+- include: tmux.yml
+
+# rvm ruby
+- include: rvm_ruby.yml
+  sudo: yes
+  vars:
+    default_ruby: 2.2.2
+    rubies:
+      - 2.2.2
+    ruby_files:
+      - roles/common/files/rubies/ruby-2.2.2.tar.bz2

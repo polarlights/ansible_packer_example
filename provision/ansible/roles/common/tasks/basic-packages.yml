@@ -9,5 +9,9 @@
     - libmysqlclient-dev
     - ntp
     - zip
+    - tmux
+    - xclip
+    - imagemagick
+    - nfs-common
   sudo: true
   tags: basic-packages

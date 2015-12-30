@@ -1,6 +1,6 @@
 ---
 - name: server base configration
-  hosts: docker
+  hosts: base-server
   roles:
     - common
   gather_facts: true
