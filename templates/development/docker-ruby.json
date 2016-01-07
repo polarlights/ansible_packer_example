@@ -1,0 +1,29 @@
+{
+  "variables": {
+    "ssh_host": "localhost",
+    "ssh_port": "2222",
+    "ssh_username": "vagrant",
+    "ssh_private_key_file": ""
+  },
+  "builders": [
+    {
+      "type": "docker",
+      "image": "ubuntu:14.04",
+      "commit": true
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": ["provision/scripts/apt-update.sh", "provision/scripts/install-ansible.sh"]
+    },
+    {
+      "type": "ansible-local",
+      "inventory_groups": "base-server",
+      "playbook_file": "provision/ansible/base-server.yml",
+      "playbook_dir": "provision/ansible"
+    }
+  ],
+  "post-processors": []
+}
