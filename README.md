@@ -61,7 +61,7 @@ TBD
 
 # TODO
 
-- [*] basic ansible scripts.
-- [] integrate with packer.
+- [x] basic ansible scripts.
+- [x] integrate with packer.
 - [ ] add configration for nginx.
 - [ ] add configration for docker.
